@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 300,
+  "height": 200,
+  "title": {"text": {"expr": "'CO2 Emision by Industries in '+ Year_Selector"}},
+  "data": {
+    "url": "https://raw.githubusercontent.com/LongNHDoan/Project-2/main/Industry_Annual_Co2.csv"
+  },
+  "params": [
+    {
+      "name": "Year_Selector",
+      "value": 2019,
+      "bind": {
+        "input": "range",
+        "max": 2019,
+        "min": 1900,
+        "step": 1,
+        "name": "Year"
+      }
+    }
+  ],
+  "layer": [
+    {
+      "mark": {"type": "arc", "innerRadius": 70},
+      "transform": [{"filter": "year(datum.year) == Year_Selector"}],
+      "encoding": {
+        "theta": {"field": "Co2 Emission", "type": "quantitative"},
+        "color": {
+          "field": "Type",
+          "type": "nominal",
+          "title": "Industry Name",
+          "scale": {"range": ["#F25F5C", "#FFE066", "#247BA0", "#70C1B3"]}
+        },
+        "tooltip": [
+          {
+            "field": "Co2 Emission",
+            "type": "quantitative",
+            "title": "Total C02 Emission"
+          },
+          {"field": "Type", "type": "nominal", "title": "Industry"}
+        ]
+      }
+    },
+    {
+      "transform": [
+        {
+          "aggregate": [
+            {"op": "sum", "field": "Co2 Emission", "as": "Total_Co2"}
+          ],
+          "groupby": ["year"]
+        },
+        {"filter": "year(datum.year) == Year_Selector"},
+        {
+          "calculate": "'Total: '+ceil(datum.Total_Co2)",
+          "as": "text_annotation"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "fontWeight": "bold",
+        "fontSize": 15
+      },
+      "encoding": {"text": {"field": "text_annotation"}}
+    }
+  ],
+  "config": {}
+}
