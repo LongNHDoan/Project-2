@@ -1,0 +1,199 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": {
+      "expr": "'World CO2 Emission '   + Type_Selection +' in '+ Year_Selection  +  if(Type_Selection == 'per Capita',' (tones/person) ',' (million tonnes) ')"
+    },
+    "fontSize": 18,
+    "font": "Lato",
+    "anchor": "start"
+  },
+  "width": 1400,
+  "height": 500,
+  "projection": {
+    "type": "equirectangular",
+    "scale": {
+      "expr": "scale"
+    },
+    "center": {
+      "expr": "map_center"
+    }
+  },
+  "params": [
+    {
+      "name": "Year_Selection",
+      "value": 2019,
+      "bind": {
+        "input": "range",
+        "min": 1900,
+        "max": 2019,
+        "step": 1,
+        "name": "Year:"
+      }
+    },
+    {
+      "name": "scale",
+      "value": 170,
+      "bind": {
+        "input": "range",
+        "min": 100,
+        "max": 1000,
+        "step": 10,
+        "name": "Zoom:"
+      }
+    },
+    {
+      "name": "map_center",
+      "value": [
+        0,
+        0
+      ],
+      "bind": {
+        "input": "select",
+        "options": [
+          [
+            0,
+            0
+          ],
+          [
+            146,
+            -20
+          ],
+          [
+            120,
+            30
+          ],
+          [
+            20,
+            0
+          ],
+          [
+            -110,
+            45
+          ],
+          [
+            -65,
+            -20
+          ],
+          [
+            14,
+            48
+          ]
+        ],
+        "labels": [
+          "World",
+          "Autralia",
+          "Asia",
+          "Africa",
+          "North America",
+          "South America",
+          "Europe"
+        ],
+        "name": "Map center:"
+      }
+    },
+    {
+      "name": "Type_Selection",
+      "value": "per Country",
+      "bind": {
+        "input": "select",
+        "options": [
+          "per Country",
+          "per Capita"
+        ],
+        "name": "Type:"
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/LongNHDoan/Project-2/main/worldMap.geo.json",
+        "format": {
+          "type": "topojson",
+          "feature": "custom.geo"
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#e5e5e5",
+        "stroke": "grey",
+        "strokeWidth": 0.5
+      }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/LongNHDoan/Project-2/main/Countries_Annual_Co2.csv"
+      },
+      "transform": [
+        {
+          "filter": "year(datum.year) == Year_Selection"
+        },
+        {
+          "lookup": "country",
+          "from": {
+            "data": {
+              "url": "https://raw.githubusercontent.com/LongNHDoan/Project-2/main/worldMap.geo.json",
+              "format": {
+                "type": "topojson",
+                "feature": "custom.geo"
+              }
+            },
+            "key": "properties.name"
+          },
+          "as": "geo"
+        },
+        {
+          "calculate": "if(Type_Selection == 'per Capita',datum.co2_per_capita,datum.co2)",
+          "as": "CO2 Emission"
+        }
+      ],
+      "mark": {
+        "type": "geoshape",
+        "stroke": "grey",
+        "strokeWidth": 0.5
+      },
+      "encoding": {
+        "shape": {
+          "field": "geo",
+          "type": "geojson"
+        },
+        "color": {
+          "field": "CO2 Emission",
+          "type": "quantitative",
+          "scale": {
+            "type": "threshold",
+            "domain": {
+              "expr": "if(Type_Selection == 'per Capita',[3, 6, 12, 18, 24], [100, 1000, 2500, 7500, 10000])"
+            },
+            "range": [
+              "#fee5d9",
+              "#fcbba1",
+              "#fc9272",
+              "#fb6a4a",
+              "#de2d26",
+              "#a50f15"
+            ]
+          }
+        },
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "CO2 Emission",
+            "type": "quantitative",
+            "title": "CO2 Emission"
+          }
+        ]
+      }
+    }
+  ],
+  "config": {
+    "title": {
+      "orient": "top"
+    }
+  }
+}

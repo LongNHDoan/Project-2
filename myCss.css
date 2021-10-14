@@ -1,0 +1,22 @@
+.pure-u-1{
+    margin-block-end: 12px;
+    margin-left: 10vw;
+    margin-right: 5vw;
+}
+.pure-u-1-2{
+    width: 665px;
+    margin-block-end: 50px;
+    margin-inline-start: 10vw;
+}
+
+h1{
+    text-align: center;
+    background-color: #fb6a4a;
+    margin-block-end: 1px;
+}
+p{
+    margin-block-start: 2px;
+    font-size: smaller;
+    color: grey;
+}
+

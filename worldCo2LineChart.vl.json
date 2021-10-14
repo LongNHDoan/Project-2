@@ -1,0 +1,177 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1400,
+  "height": 400,
+  "title": {
+    "text": {
+      "expr": "' World Co2 Emission ' +if(Type_Selection == 'per Capita', 'per Capita ', '')+ 'between '+ minYear + ' - ' + maxYear"
+    }
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/LongNHDoan/Project-2/main/World_Annual_Co2.csv"
+  },
+  "params": [
+    {
+      "name": "minYear",
+      "value": 1900,
+      "bind": {
+        "input": "range",
+        "min": 1900,
+        "max": 2000,
+        "step": 1,
+        "name": "Minimum year:"
+      }
+    },
+    {
+      "name": "maxYear",
+      "value": 2019,
+      "bind": {
+        "input": "range",
+        "min": 1920,
+        "max": 2019,
+        "step": 1,
+        "name": "Maximum year:"
+      }
+    },
+    {
+      "name": "Type_Selection",
+      "value": "Total",
+      "bind": {
+        "input": "select",
+        "options": [
+          "Total",
+          "per Capita"
+        ],
+        "name": "Type:"
+      }
+    }
+  ],
+  "encoding": {
+    "x": {
+      "timeUnit": "year",
+      "field": "year",
+      "axis": {
+        "format": "%Y",
+        "grid": false,
+        "tickCount": 7,
+        "titleFontSize": 13
+      },
+      "title": "Year"
+    },
+    "y": {
+      "field": "CO2 Emission",
+      "type": "quantitative",
+      "title": "Co2 Emission",
+      "axis": {
+        "tickCount": 6
+      }
+    }
+  },
+  "transform": [
+    {
+      "filter": "year(datum.year)<=maxYear"
+    },
+    {
+      "filter": "year(datum.year)>=minYear"
+    },
+    {
+      "calculate": "if(Type_Selection == 'per Capita',datum.co2_per_capita,datum.co2)",
+      "as": "CO2 Emission"
+    }
+  ],
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "color": "#de2d26"
+      }
+    },
+    {
+      "transform": [
+        {
+          "filter": "year(datum.year)==1910 || year(datum.year)==2010"
+        },
+        {
+          "filter": "maxYear == 2019"
+        },
+        {
+          "filter": "minYear == 1900"
+        }
+      ],
+      "layer": [
+        {
+          "mark": {
+            "type": "point",
+            "color": "black",
+            "size": 120,
+            "opacity": 1
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "year(datum.year)==1910"
+            },
+            {
+              "filter": "maxYear == 2019"
+            },
+            {
+              "filter": "minYear == 1900"
+            },
+            {
+              "calculate": "'Co2 Emission: ' + ceil(if(Type_Selection == 'per Capita',datum.co2_per_capita,datum.co2))",
+              "as": "text_annotation"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "color": "black",
+            "dy": {
+              "expr": "if(Type_Selection == 'per Capita',-30, -30)"
+            },
+            "size": 14
+          },
+          "encoding": {
+            "text": {
+              "field": "text_annotation"
+            }
+          }
+        },
+        {
+          "transform": [
+            {
+              "filter": "year(datum.year)==2010"
+            },
+            {
+              "filter": "maxYear == 2019"
+            },
+            {
+              "filter": "minYear == 1900"
+            },
+            {
+              "calculate": "'Co2 Emission: ' + ceil(if(Type_Selection == 'per Capita',datum.co2_per_capita,datum.co2))",
+              "as": "text_annotation"
+            }
+          ],
+          "mark": {
+            "type": "text",
+            "color": "black",
+            "dx": {
+              "expr": "if(Type_Selection == 'per Capita',0, -80)"
+            },
+            "dy": {
+              "expr": "if(Type_Selection == 'per Capita',-40, 0)"
+            },
+            "size": 14
+          },
+          "encoding": {
+            "text": {
+              "field": "text_annotation"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "config": {}
+}
