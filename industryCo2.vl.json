@@ -19,28 +19,6 @@
         "step": 1,
         "name": "Year:"
       }
-    },
-    {
-      "name": "minYear",
-      "value": 1900,
-      "bind": {
-        "input": "range",
-        "min": 1900,
-        "max": 2000,
-        "step": 1,
-        "name": "Minimum year:"
-      }
-    },
-    {
-      "name": "maxYear",
-      "value": 2019,
-      "bind": {
-        "input": "range",
-        "min": 1920,
-        "max": 2019,
-        "step": 1,
-        "name": "Maximum year:"
-      }
     }
   ],
   "hconcat": [
