@@ -1,14 +1,17 @@
-.pure-u-1{
-    margin-block-end: 12px;
-    margin-left: 10vw;
-    margin-right: 5vw;
-}
-.pure-u-1-2{
-    width: 665px;
-    margin-block-end: 50px;
-    margin-inline-start: 10vw;
+
+.pure-u-10-24{
+    margin-block-end: 30px;
+    
 }
 
+.pure-u-20-24{
+    margin-block-end: 30px;
+}
+
+.pure-u-2-24{
+    background-color: grey;
+    
+}
 h1{
     margin-block-start: 0px;
     text-align: center;
@@ -16,9 +19,11 @@ h1{
     margin-block-end: 1px;
 }
 p{
-    margin-left: 10vw;
     margin-block-start: 2px;
     font-size: smaller;
     color: grey;
 }
 
+#industry1{
+    align-content: center;
+}

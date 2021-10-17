@@ -8,7 +8,7 @@
     "font": "Lato",
     "anchor": "start"
   },
-  "width": 1400,
+  "width": 1100,
   "height": 500,
   "projection": {
     "type": "equalEarth",

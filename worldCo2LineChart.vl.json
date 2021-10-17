@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 1400,
+  "width": 1150,
   "height": 400,
   "title": {
     "text": {
@@ -88,14 +88,14 @@
       "encoding": {
         "tooltip": [
           {
-            "field": "country",
-            "type": "nominal",
-            "title": "Country"
-          },
-          {
             "field": "CO2 Emission",
             "type": "quantitative",
-            "title": "CO2 Emission"
+            "title": "CO2 Emission:"
+          },
+          {
+            "timeUnit": "year",
+            "field": "year",
+            "title": "Year:"
           }
         ]
       }
@@ -125,11 +125,12 @@
               {
                 "field": "CO2 Emission",
                 "type": "quantitative",
-                "title": "CO2 Emission"
+                "title": "CO2 Emission:"
               },
               {
                 "timeUnit": "year",
-                "field": "year"
+                "field": "year",
+                "title": "Year:"
               }
             ]
           }
