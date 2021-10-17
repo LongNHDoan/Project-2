@@ -84,6 +84,20 @@
       "mark": {
         "type": "line",
         "color": "#de2d26"
+      },
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "country",
+            "type": "nominal",
+            "title": "Country"
+          },
+          {
+            "field": "CO2 Emission",
+            "type": "quantitative",
+            "title": "CO2 Emission"
+          }
+        ]
       }
     },
     {
@@ -105,6 +119,19 @@
             "color": "black",
             "size": 120,
             "opacity": 1
+          },
+          "encoding": {
+            "tooltip": [
+              {
+                "field": "CO2 Emission",
+                "type": "quantitative",
+                "title": "CO2 Emission"
+              },
+              {
+                "timeUnit": "year",
+                "field": "year"
+              }
+            ]
           }
         },
         {

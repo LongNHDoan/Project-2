@@ -2,7 +2,7 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "title": {
     "text": {
-      "expr": "'CO2 Emisison by Industries in ' + Year_Selector + ' (million tonnes)'"
+      "expr": "'CO2 Emission by Industries in ' + Year_Selector + ' (million tonnes)'"
     }
   },
   "data": {

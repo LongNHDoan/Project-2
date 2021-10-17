@@ -10,11 +10,13 @@
 }
 
 h1{
+    margin-block-start: 0px;
     text-align: center;
     background-color: #fb6a4a;
     margin-block-end: 1px;
 }
 p{
+    margin-left: 10vw;
     margin-block-start: 2px;
     font-size: smaller;
     color: grey;

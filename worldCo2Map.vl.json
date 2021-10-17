@@ -11,7 +11,7 @@
   "width": 1400,
   "height": 500,
   "projection": {
-    "type": "equirectangular",
+    "type": "equalEarth",
     "scale": {
       "expr": "scale"
     },

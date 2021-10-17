@@ -4,7 +4,7 @@
   "height": 200,
   "title": {
     "text": {
-      "expr": "'CO2 Emision by Industries between ' + minYear + ' and ' + maxYear + ' (million tonnes)'"
+      "expr": "'CO2 Emission by Industries between ' + minYear + ' and ' + maxYear + ' (million tonnes)'"
     }
   },
   "data": {
@@ -119,7 +119,16 @@
             {
               "filter": "minYear == 1900"
             }
-          ]
+          ],
+          "encoding": {
+            "tooltip": [
+              {
+                "timeUnit": "year",
+                "field": "year",
+                "title": "Year:"
+              }
+            ]
+          }
         },
         {
           "transform": [
